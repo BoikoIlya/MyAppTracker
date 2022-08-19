@@ -1,4 +1,4 @@
-#RUNNING TRACKER APP
+#MyAppTracker
 
 Stack:
 - Kotlin
