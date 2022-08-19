@@ -5,6 +5,7 @@ Stack:
 - Clean arcitacture
 - MVVM
 - Jetpack Compose
+- Google maps Compose
 - Compose Destinations
 - Hilt
 - Coroutines
