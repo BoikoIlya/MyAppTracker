@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyAppTracker</string>
+    <string name="title_activity_tracking_acivity">TrackingAcivity</string>
+</resources>
