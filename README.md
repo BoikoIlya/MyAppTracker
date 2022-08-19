@@ -1,4 +1,3 @@
-This is running tracker app.
 
 Stack:
 - Kotlin
