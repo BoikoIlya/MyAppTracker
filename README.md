@@ -2,7 +2,7 @@
 
 Stack:
 - Kotlin
-- Clean arcitacture
+- Clean archetecture
 - MVVM
 - Jetpack Compose
 - Google maps Compose
