@@ -1,14 +1,11 @@
 package com.ilya.myapptracker.di
 
-import android.content.Context
-import com.ilya.myapptracker.data.local.location.LocationTrackerImpl
 import com.ilya.myapptracker.domain.repositiry.DBRepository
 import com.ilya.myapptracker.domain.repositiry.LocationRepository
 import com.ilya.myapptracker.domain.usecases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 

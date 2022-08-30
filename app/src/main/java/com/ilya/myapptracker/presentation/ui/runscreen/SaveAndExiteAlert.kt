@@ -19,8 +19,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.ilya.myapptracker.presentation.ui.destinations.HistoryScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ilya.myapptracker.R
 import com.ilya.myapptracker.presentation.ui.activities.MainActivity
 
@@ -55,7 +53,6 @@ fun SaveAndExit(
                     onClick = {
                         showAlert.value = false
                         context.startActivity(Intent(context, MainActivity::class.java))
-                        context.finish()
                     }) {
                     Text(text = "Just exit.", color = Color.Black)
                 }

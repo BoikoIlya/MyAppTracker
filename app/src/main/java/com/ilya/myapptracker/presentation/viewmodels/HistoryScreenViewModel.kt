@@ -2,6 +2,8 @@ package com.ilya.myapptracker.presentation.viewmodels
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,22 +32,23 @@ class HistoryScreenViewModel @Inject constructor(
     private val getSumOfDistanceFromDBUseCase: GetSumOfDistanceFromDBUseCase
 ): ViewModel() {
 
-    val _allData = mutableStateOf(mutableListOf(RunningDataAndCoordinates(runningData = RunningData(
+    private val _allData = mutableStateOf(mutableListOf(RunningDataAndCoordinates(runningData = RunningData(
         runningDataId = "",
         dateRun = "",
         distanceInMeters = 0.0f,
         durationInSeconds = 0,
         averageSpeedInKmH = 0.0f,
         calories = 0), emptyList() )))
+    val allData: State<MutableList<RunningDataAndCoordinates>> = _allData
 
-    val _totalDurationInSeconds = mutableStateOf(TotalTimeFromDBState())
+    private val _totalDurationInSeconds = mutableStateOf(TotalTimeFromDBState())
+    val totalDurationInSeconds: State<TotalTimeFromDBState> = _totalDurationInSeconds
 
-    val _totalCalories = mutableStateOf(TotalCaloriesFromDBState())
+    private val _totalCalories = mutableStateOf(TotalCaloriesFromDBState())
+    val totalCalories: State<TotalCaloriesFromDBState> = _totalCalories
 
-    val _totalDistanceInMeters = mutableStateOf(TotalDistanceFromDBState())
-
-    val _isGPSEnabled = mutableStateOf(true)
-
+    private val _totalDistanceInMeters = mutableStateOf(TotalDistanceFromDBState())
+    val totalDistanceInMeters: State<TotalDistanceFromDBState> = _totalDistanceInMeters
 
 
     init {

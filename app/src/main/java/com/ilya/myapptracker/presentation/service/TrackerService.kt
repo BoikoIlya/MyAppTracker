@@ -9,7 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.model.LatLng
-import com.ilya.myapptracker.data.local.location.LocationTracker
+import com.ilya.myapptracker.data.remote.location.LocationTracker
 import com.ilya.myapptracker.domain.usecases.CalculateDistanceUseCase
 import com.ilya.myapptracker.utils.Constants
 import com.ilya.myapptracker.utils.Resource
@@ -33,6 +33,12 @@ import kotlin.time.Duration.Companion.seconds
          val distance = _distance.asStateFlow()
         private val _isTracking =  MutableStateFlow(false)
          val isTracking =  _isTracking.asStateFlow()
+
+        fun clearData(){
+            _pointList.value =mutableListOf(LatLng(0.0, 0.0))
+            _timer.value = 0L
+            _distance.value = 0f
+        }
     }
 
 

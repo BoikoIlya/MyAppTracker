@@ -1,7 +1,6 @@
 package com.ilya.myapptracker.domain.usecases
 
 import android.location.Location
-import com.ilya.myapptracker.data.local.location.LocationTrackerImpl
 import com.ilya.myapptracker.domain.repositiry.LocationRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

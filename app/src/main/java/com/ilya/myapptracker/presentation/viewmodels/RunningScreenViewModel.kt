@@ -25,19 +25,29 @@ class RunningScreenViewModel @Inject constructor(
     private val sharedPrefRepository: SharedPrefRepository
 ): ViewModel() {
 
-    val _serviceState = mutableStateOf(false)
+    private val _serviceState = mutableStateOf(false)
+    val serviceState: State<Boolean> = _serviceState
 
-    val _pointList = mutableStateOf(mutableListOf(LatLng(0.0, 0.0)))
+    private val _pointList = mutableStateOf(mutableListOf(LatLng(0.0, 0.0)))
+    val pointList: State<MutableList<LatLng>> = _pointList
 
-    val _weightSettings  = mutableStateOf(0f)
+    private val _weightSettings  = mutableStateOf(0f)
+    val weightSettings: State<Float>  = _weightSettings
 
-    val _currentLocationData = mutableStateOf(CurrentLocationState())
+    private val _currentLocationData = mutableStateOf(CurrentLocationState())
+    val currentLocationData = _currentLocationData
 
-    val _time = mutableStateOf(0L)
+    private val _time = mutableStateOf(0L)
+    val time: State<Long> = _time
 
-    val _distance = mutableStateOf(0f)
+    private val _distance = mutableStateOf(0f)
+    val distance: State<Float> = _distance
 
-    val _speed = mutableStateOf(0f)
+    private val _speed = mutableStateOf(0f)
+    val speed: State<Float> = _speed
+
+    private val _loading = mutableStateOf(false)
+    val loading: State<Boolean> = _loading
 
 
     init {
@@ -120,7 +130,15 @@ class RunningScreenViewModel @Inject constructor(
            _time.value,
            _distance.value,
            _pointList.value,
-       _weightSettings.value)
+       _weightSettings.value).collect{
+           when(it){
+               is Resource.Success -> {
+                  _loading.value = false
+               }
+               is Resource.Error -> {}
+               is Resource.Loading -> _loading.value = true
+           }
+       }
     }
 
 

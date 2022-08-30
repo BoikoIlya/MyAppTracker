@@ -70,19 +70,19 @@ fun HistoryScreen(
         }
 
     val totalDurationInSeconds = remember {
-        mutableStateOf(viewModel._totalDurationInSeconds.value)
+        mutableStateOf(viewModel.totalDurationInSeconds.value)
     }
-    totalDurationInSeconds.value = viewModel._totalDurationInSeconds.value
+    totalDurationInSeconds.value = viewModel.totalDurationInSeconds.value
 
     val totalCalories = remember {
-        mutableStateOf(viewModel._totalCalories.value)
+        mutableStateOf(viewModel.totalCalories.value)
     }
-    totalCalories.value = viewModel._totalCalories.value
+    totalCalories.value = viewModel.totalCalories.value
 
     val totalDistanceInMeters = remember {
-        mutableStateOf(viewModel._totalDistanceInMeters.value)
+        mutableStateOf(viewModel.totalDistanceInMeters.value)
     }
-    totalDistanceInMeters.value = viewModel._totalDistanceInMeters.value
+    totalDistanceInMeters.value = viewModel.totalDistanceInMeters.value
 
 LazyColumn(
     modifier = Modifier
@@ -124,12 +124,12 @@ LazyColumn(
         }
         Spacer(modifier = Modifier.height(30.dp))
     }
-    if(viewModel._allData.value.size ==0) {
+    if(viewModel.allData.value.size ==0) {
         item {
           NoRunningDataItem()
         }
     }
-    items(viewModel._allData.value){ item ->
+    items(viewModel.allData.value){ item ->
         Spacer(modifier = Modifier.height(10.dp))
         ResultItem(
             valueDate = item.runningData.dateRun,

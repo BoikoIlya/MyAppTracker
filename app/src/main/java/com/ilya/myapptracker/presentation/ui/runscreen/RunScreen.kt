@@ -3,9 +3,11 @@ package com.ilya.myapptracker.presentation.ui.runscreen
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -19,19 +21,19 @@ fun RunScreen(
     viewModel: RunningScreenViewModel = hiltViewModel(),
 ){
 
-        val positionState = remember { mutableStateOf(viewModel._currentLocationData.value.data)}
+        val positionState = remember { mutableStateOf(viewModel.currentLocationData.value.data)}
         val cameraPositionState = rememberCameraPositionState{
             this.position = CameraPosition.fromLatLngZoom(positionState.value, 15f)
         }
         val markerPositionState = rememberMarkerState(position = positionState.value)
-        val time = viewModel._time
-        val distance = viewModel._distance
-        val speed = viewModel._speed
+        val time = viewModel.time
+        val distance = viewModel.distance
+        val speed = viewModel.speed
         val serviceState =  remember {
-            mutableStateOf(viewModel._serviceState.value)
+            mutableStateOf(viewModel.serviceState.value)
         }
 
-        positionState.value = viewModel._currentLocationData.value.data
+        positionState.value = viewModel.currentLocationData.value.data
         cameraPositionState.position = CameraPosition.fromLatLngZoom(positionState.value, 15f)
         markerPositionState.position = positionState.value
 
@@ -39,29 +41,33 @@ fun RunScreen(
           if (serviceState.value){
               viewModel.startTracking()
           }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            GoogleMap(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.83f),
-                uiSettings = MapUiSettings(zoomControlsEnabled = false),
-                cameraPositionState = cameraPositionState
-            ){
-                Marker(
-                    state = markerPositionState,
-                    title = "${positionState.value}",
-                )
-                Polyline(
-                    points = viewModel._pointList.value.toList(),
-                    color = Color.Blue,
-                    width = 20f
-                )
-            }
-            BottomBar(time, distance, speed, serviceState)
-        }
+       Box(modifier = Modifier.fillMaxSize(),
+       contentAlignment = Alignment.Center) {
+           Column(
+               modifier = Modifier
+                   .fillMaxSize()
+           ) {
+               GoogleMap(
+                   modifier = Modifier
+                       .fillMaxWidth()
+                       .fillMaxHeight(0.83f),
+                   uiSettings = MapUiSettings(zoomControlsEnabled = false),
+                   cameraPositionState = cameraPositionState
+               ) {
+                   Marker(
+                       state = markerPositionState,
+                       title = "${positionState.value}",
+                   )
+                   Polyline(
+                       points = viewModel.pointList.value.toList(),
+                       color = Color.Blue,
+                       width = 20f
+                   )
+               }
+               BottomBar(time, distance, speed, serviceState)
+           }
+           if (viewModel.loading.value)
+               CircularProgressIndicator()
+       }
     }
 

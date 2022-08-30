@@ -1,5 +1,6 @@
 package com.ilya.myapptracker.presentation.ui.runscreen
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,10 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,14 +29,14 @@ import kotlin.time.Duration.Companion.seconds
 @RequiresApi(Build.VERSION_CODES.Q)
 @Composable
 fun BottomBar(
-    time: MutableState<Long>,
-    distance: MutableState<Float>,
-    speed: MutableState<Float>,
+    time: State<Long>,
+    distance: State<Float>,
+    speed: State<Float>,
     serviceState: MutableState<Boolean>,
     viewModel: RunningScreenViewModel = hiltViewModel(),
 )
 {
-    val context = LocalContext.current
+    val context = LocalContext.current as Activity
 
     val saveBtnVisibility = remember {
         mutableStateOf(false)
@@ -49,7 +47,12 @@ fun BottomBar(
     }
     if (showSaveAlert.value){
         SaveAndExit(
-            SaveAndExit = { viewModel.insertDataToDB() },
+            SaveAndExit = {
+                viewModel.insertDataToDB()
+                if (!viewModel.loading.value)
+                    context.finish()
+                 TrackerService.clearData()
+                          },
             showAlert = showSaveAlert)
     }
 

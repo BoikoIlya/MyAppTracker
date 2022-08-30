@@ -1,4 +1,4 @@
-package com.ilya.myapptracker.data.local.location
+package com.ilya.myapptracker.data.remote.location
 
 import com.google.android.gms.maps.model.LatLng
 import com.ilya.myapptracker.utils.Resource

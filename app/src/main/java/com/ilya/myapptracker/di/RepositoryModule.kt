@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.ilya.myapptracker.data.local.db.RunningDB
 import com.ilya.myapptracker.data.local.db.RunningDao
-import com.ilya.myapptracker.data.local.location.LocationTracker
-import com.ilya.myapptracker.data.local.location.LocationTrackerImpl
+import com.ilya.myapptracker.data.remote.location.LocationTracker
+import com.ilya.myapptracker.data.remote.location.LocationTrackerImpl
 import com.ilya.myapptracker.data.local.sharedpref.SharedPref
 import com.ilya.myapptracker.data.local.sharedpref.SharedPrefImpl
 import com.ilya.myapptracker.data.repositiry.DBRepositoryImpl

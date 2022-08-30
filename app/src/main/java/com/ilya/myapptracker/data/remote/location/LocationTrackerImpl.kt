@@ -1,4 +1,4 @@
-package com.ilya.myapptracker.data.local.location
+package com.ilya.myapptracker.data.remote.location
 
 import android.Manifest
 import android.annotation.SuppressLint
