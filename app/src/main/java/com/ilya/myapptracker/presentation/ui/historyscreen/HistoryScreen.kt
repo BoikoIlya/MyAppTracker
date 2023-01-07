@@ -64,10 +64,11 @@ fun HistoryScreen(
     val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     isGpsEnabled.value =  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
 
-    if(!isGpsEnabled.value)
+    if(!isGpsEnabled.value) {
         EnableGps(isGpsEnabled = isGpsEnabled) {
-            locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+            isGpsEnabled.value =  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         }
+    }
 
     val totalDurationInSeconds = remember {
         mutableStateOf(viewModel.totalDurationInSeconds.value)
